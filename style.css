@@ -12,6 +12,11 @@ form {
     border: 1px solid #000;
 }
 
+form p {
+    color: tomato;
+    margin: 0px;
+}
+
 .task_input {
     width: 73%;
     height: 15px;
