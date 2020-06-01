@@ -31,46 +31,51 @@ $tasks = $mysqli->query('SELECT * FROM tasks');
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-    <title>ToDo App</title>
+    <title>Stuff ToDo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" type="text/css" >
 </head>
 <body>
 
-    <div class="heading">
-        <h2>ToDo App</h2>
-    </div>
+    <header>
+        <div class="title">
+            <h2>Stuff<br>ToDo</h2>
+        </div>
+    </header>
 
-    <form method="post" action="index.php">
-        <?php if (isset($error)) { ?>
-            <p><?php echo $error; ?></p>
-        <?php } ?>
-        <input type="text" name="task" class="task_input">
-        <button type="submit" class="add_btn" name="submit">Add task</button>
-    </form>
+    <main>
+        <form class="task-form" method="post" action="index.php">
+            <?php if (isset($error)) { ?>
+            <input type="text" name="task" class="task-input" placeholder="Add new task" />
 
-    <table>
-        <thead>
-            <tr>
-            <th>N</th>
-            <th>Tasks</th>
-            <th>Action</th>
-            </tr>
-        </thead>
+            <button type="submit" name="submit" class="add-btn" >+</button>
+            <p class="error"><?php echo $error; ?></p>
+            <?php } ?>
+        </form>
 
-        <tbody>
-            <?php $i = 1; while ($row = $tasks->fetch_array()) { ?>
-                <tr>
-                    <td><?php echo $i; ?></td>
-                    <td class="task"><?php echo $row['task']; ?></td>
-                    <td class="delete">
-                        <a href="index.php?del_task=<?php echo $row['id']; ?>">x</a>
-                    </td>
-                </tr>
+    
+        <div class="todo-list">
+            <p class="task-count">3 tasks remaining</p>
 
-            <?php $i++; } ?>
+            <div class="tasks">
 
-        </tbody>
-    </table>
+                <div class="task">
+                    <?php $i = 1; while ($row = $tasks->fetch_array()) { ?>
+                        <?php echo $i; ?>
+                        
+                    <input type="checkbox" id="task" />
+                    <label for="task">
+                        <span class="custom-checkbox"></span><?php echo $row['task']; ?>
+                    </label>
+                    <a class="delete" href="index.php?del_task=<?php echo $row['id']; ?>">x</a>
+                    <?php $i++; } ?>
+                </div>
+            </div>
 
+        </div>
+
+    </main>
+
+<footer></footer>
 </body>
 </html>
